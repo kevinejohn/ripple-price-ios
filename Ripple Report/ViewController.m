@@ -46,13 +46,13 @@
             NSNumber * rate = [self convertNumber:[dic objectForKey:@"rate"]];
             
             if ([currency isEqualToString:@"USD"]) {
-                self.labelUSD.text = rate.stringValue;
+                self.labelUSD.text = [NSString stringWithFormat:@"USD:Bitstamp %@", rate.stringValue];
             }
             else if ([currency isEqualToString:@"BTC"]) {
-                self.labelBTC.text = rate.stringValue;
+                self.labelBTC.text = [NSString stringWithFormat:@"BTC:Bitstamp %@", rate.stringValue];
             }
             else if ([currency isEqualToString:@"CNY"]) {
-                self.labelCYN.text = rate.stringValue;
+                self.labelCYN.text = [NSString stringWithFormat:@"CNY:RippleCN %@", rate.stringValue];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
