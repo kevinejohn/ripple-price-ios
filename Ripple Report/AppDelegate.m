@@ -12,6 +12,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UILabel appearance] setFont:[UIFont fontWithName:@"OpenSans" size:17.0]];
+    [[UIButton appearance] setFont:[UIFont fontWithName:@"OpenSans" size:17.0]];
+    [[UITextField appearance] setFont:[UIFont fontWithName:@"OpenSans" size:17.0]];
+    
     // Override point for customization after application launch.
     return YES;
 }

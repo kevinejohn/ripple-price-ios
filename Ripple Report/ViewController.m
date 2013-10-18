@@ -11,7 +11,9 @@
 
 #define GLOBAL_FACTOR 1000000.0
 
-@interface ViewController ()
+@interface ViewController () {
+    NSTimer * timer;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel * labelUSD;
 @property (weak, nonatomic) IBOutlet UILabel * labelBTC;
@@ -58,6 +60,10 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+    
+    [timer invalidate];
+    timer = nil;
+    timer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(updateRippleCharts) userInfo:nil repeats:NO];
 }
 
 - (void)viewDidLoad
@@ -65,7 +71,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self updateRippleCharts];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRippleCharts) name: UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning

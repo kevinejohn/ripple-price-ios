@@ -31,6 +31,18 @@
 		2BD2E3A018109E5C006A25A8 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2E39418109E5C006A25A8 /* AFURLRequestSerialization.m */; };
 		2BD2E3A118109E5C006A25A8 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2E39618109E5C006A25A8 /* AFURLResponseSerialization.m */; };
 		2BD2E3A218109E5C006A25A8 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2E39818109E5C006A25A8 /* AFURLSessionManager.m */; };
+		2BD2E3B11810A57C006A25A8 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3A61810A57C006A25A8 /* OpenSans-Bold.ttf */; };
+		2BD2E3B21810A57C006A25A8 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3A71810A57C006A25A8 /* OpenSans-BoldItalic.ttf */; };
+		2BD2E3B31810A57C006A25A8 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3A81810A57C006A25A8 /* OpenSans-ExtraBold.ttf */; };
+		2BD2E3B41810A57C006A25A8 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3A91810A57C006A25A8 /* OpenSans-ExtraBoldItalic.ttf */; };
+		2BD2E3B51810A57C006A25A8 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AA1810A57C006A25A8 /* OpenSans-Italic.ttf */; };
+		2BD2E3B61810A57C006A25A8 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AB1810A57C006A25A8 /* OpenSans-Light.ttf */; };
+		2BD2E3B71810A57C006A25A8 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AC1810A57C006A25A8 /* OpenSans-LightItalic.ttf */; };
+		2BD2E3B81810A57C006A25A8 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AD1810A57C006A25A8 /* OpenSans-Regular.ttf */; };
+		2BD2E3B91810A57C006A25A8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AE1810A57C006A25A8 /* OpenSans-Semibold.ttf */; };
+		2BD2E3BA1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AF1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf */; };
+		2BD2E3BE1810A633006A25A8 /* top_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3BC1810A633006A25A8 /* top_logo.png */; };
+		2BD2E3BF1810A633006A25A8 /* top_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +95,18 @@
 		2BD2E39618109E5C006A25A8 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		2BD2E39718109E5C006A25A8 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		2BD2E39818109E5C006A25A8 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		2BD2E3A61810A57C006A25A8 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		2BD2E3A71810A57C006A25A8 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		2BD2E3A81810A57C006A25A8 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		2BD2E3A91810A57C006A25A8 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		2BD2E3AA1810A57C006A25A8 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		2BD2E3AB1810A57C006A25A8 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		2BD2E3AC1810A57C006A25A8 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		2BD2E3AD1810A57C006A25A8 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		2BD2E3AE1810A57C006A25A8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		2BD2E3AF1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		2BD2E3BC1810A633006A25A8 /* top_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_logo.png; sourceTree = "<group>"; };
+		2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_logo@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +136,8 @@
 		2BD2E31718109018006A25A8 = {
 			isa = PBXGroup;
 			children = (
+				2BD2E3BB1810A61F006A25A8 /* Images */,
+				2BD2E3A31810A57C006A25A8 /* Fonts */,
 				2BD2E35B1810914B006A25A8 /* Libraries */,
 				2BD2E32918109018006A25A8 /* Ripple Report */,
 				2BD2E34B18109018006A25A8 /* Ripple ReportTests */,
@@ -219,6 +245,40 @@
 			path = Libraries/AFNetworking;
 			sourceTree = "<group>";
 		};
+		2BD2E3A31810A57C006A25A8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2BD2E3A41810A57C006A25A8 /* open-sans */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		2BD2E3A41810A57C006A25A8 /* open-sans */ = {
+			isa = PBXGroup;
+			children = (
+				2BD2E3A61810A57C006A25A8 /* OpenSans-Bold.ttf */,
+				2BD2E3A71810A57C006A25A8 /* OpenSans-BoldItalic.ttf */,
+				2BD2E3A81810A57C006A25A8 /* OpenSans-ExtraBold.ttf */,
+				2BD2E3A91810A57C006A25A8 /* OpenSans-ExtraBoldItalic.ttf */,
+				2BD2E3AA1810A57C006A25A8 /* OpenSans-Italic.ttf */,
+				2BD2E3AB1810A57C006A25A8 /* OpenSans-Light.ttf */,
+				2BD2E3AC1810A57C006A25A8 /* OpenSans-LightItalic.ttf */,
+				2BD2E3AD1810A57C006A25A8 /* OpenSans-Regular.ttf */,
+				2BD2E3AE1810A57C006A25A8 /* OpenSans-Semibold.ttf */,
+				2BD2E3AF1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf */,
+			);
+			path = "open-sans";
+			sourceTree = "<group>";
+		};
+		2BD2E3BB1810A61F006A25A8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2BD2E3BC1810A633006A25A8 /* top_logo.png */,
+				2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -296,9 +356,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BD2E33A18109018006A25A8 /* Main_iPad.storyboard in Resources */,
+				2BD2E3BA1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				2BD2E3B41810A57C006A25A8 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				2BD2E3B71810A57C006A25A8 /* OpenSans-LightItalic.ttf in Resources */,
 				2BD2E33F18109018006A25A8 /* Images.xcassets in Resources */,
+				2BD2E3B51810A57C006A25A8 /* OpenSans-Italic.ttf in Resources */,
+				2BD2E3B11810A57C006A25A8 /* OpenSans-Bold.ttf in Resources */,
+				2BD2E3B31810A57C006A25A8 /* OpenSans-ExtraBold.ttf in Resources */,
+				2BD2E3B21810A57C006A25A8 /* OpenSans-BoldItalic.ttf in Resources */,
+				2BD2E3BE1810A633006A25A8 /* top_logo.png in Resources */,
 				2BD2E33718109018006A25A8 /* Main_iPhone.storyboard in Resources */,
+				2BD2E3B61810A57C006A25A8 /* OpenSans-Light.ttf in Resources */,
+				2BD2E3B81810A57C006A25A8 /* OpenSans-Regular.ttf in Resources */,
+				2BD2E3B91810A57C006A25A8 /* OpenSans-Semibold.ttf in Resources */,
 				2BD2E32E18109018006A25A8 /* InfoPlist.strings in Resources */,
+				2BD2E3BF1810A633006A25A8 /* top_logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +541,7 @@
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -482,6 +555,7 @@
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -547,6 +621,7 @@
 				2BD2E35718109018006A25A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2BD2E35818109018006A25A8 /* Build configuration list for PBXNativeTarget "Ripple ReportTests" */ = {
 			isa = XCConfigurationList;
@@ -555,6 +630,7 @@
 				2BD2E35A18109018006A25A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
