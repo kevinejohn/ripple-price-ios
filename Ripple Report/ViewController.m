@@ -7,58 +7,56 @@
 //
 
 #import "ViewController.h"
-#import "AFHTTPRequestOperationManager.h"
-
-#define GLOBAL_FACTOR 1000000.0
+#import "RPTicker.h"
+#import "RPTickerManager.h"
 
 @interface ViewController () {
     NSTimer * timer;
+    
+    NSArray * tickers;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel * labelUSD;
 @property (weak, nonatomic) IBOutlet UILabel * labelBTC;
 @property (weak, nonatomic) IBOutlet UILabel * labelCYN;
 
+@property (weak, nonatomic) IBOutlet UITableView * tableView;
+
 @end
 
 @implementation ViewController
 
--(NSNumber*)convertNumber:(NSString*)value
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSNumberFormatter * f;
-    if (!f) {
-        f = [NSNumberFormatter new];
-        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    static NSString * cellIdentifier = @"cell";
+    
+    UITableViewCell * cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    NSNumber * t = [f numberFromString:value];
-    t = [NSNumber numberWithDouble:(t.doubleValue / GLOBAL_FACTOR)];
-    return t;
+    RPTicker * ticker = [tickers objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ Volume: %@", ticker.sym, ticker.last.stringValue, ticker.vol.stringValue];
+    
+    return cell;
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return tickers.count;
+}
+
+
 
 -(void)updateRippleCharts
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"https://ripplecharts.com/api/ripplecom.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        
-        NSArray * exchange = [responseObject objectForKey:@"exchange_rates"];
-        for (NSDictionary * dic in exchange) {
-            NSString * currency = [dic objectForKey:@"currency"];
-            NSNumber * rate = [self convertNumber:[dic objectForKey:@"rate"]];
-            
-            if ([currency isEqualToString:@"USD"]) {
-                self.labelUSD.text = [NSString stringWithFormat:@"USD:Bitstamp %@", rate.stringValue];
-            }
-            else if ([currency isEqualToString:@"BTC"]) {
-                self.labelBTC.text = [NSString stringWithFormat:@"BTC:Bitstamp %@", rate.stringValue];
-            }
-            else if ([currency isEqualToString:@"CNY"]) {
-                self.labelCYN.text = [NSString stringWithFormat:@"CNY:RippleCN %@", rate.stringValue];
-            }
+    [[RPTickerManager shared] updateTickers:^(NSArray *t, NSError *error) {
+        if (!error) {
+            tickers = t;
+            [self.tableView reloadData];
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
     }];
     
     [timer invalidate];
