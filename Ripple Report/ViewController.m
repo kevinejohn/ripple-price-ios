@@ -118,8 +118,11 @@
         
         
         cell.labelGateway.text = ticker.gateway;
-        cell.labelPrice.text = [formatterPrice stringFromNumber:ticker.last];
-        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
+//        cell.labelPrice.text = [formatterPrice stringFromNumber:ticker.last];
+//        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
+
+        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last];
+        cell.labelPrice.text = @"";
         cell.labelVolume.text = [NSString stringWithFormat:@"%@", [formatterVolume stringFromNumber:ticker.vol]];
         
         return cell;
@@ -212,6 +215,8 @@
     if (![self isCurrencySelected]) {
         // Expand
         [self expandCurrency:indexPath.row];
+        
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     else if (indexPath.row == selectedCurrency) {
         // Collapse tableview
@@ -223,10 +228,14 @@
         
         // Expand and collapse
         [self collapseCurrency:NO];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         [self expandCurrency:topRow];
+        
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:topRow inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
+    
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
