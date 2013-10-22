@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UILabel * labelCurrency;
 @property (strong, nonatomic) IBOutlet UILabel * labelPrice;
 @property (strong, nonatomic) IBOutlet UILabel * labelPriceOther;
+@property (strong, nonatomic) IBOutlet UIButton * buttonPrice;
 
 @end

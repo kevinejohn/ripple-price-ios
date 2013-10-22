@@ -11,12 +11,15 @@
 #import "RPTickerManager.h"
 #import "GatewayPriceCell.h"
 #import "CurrencyCell.h"
+#import "RPAverage.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate> {
     NSTimer * timer;
     NSDictionary * dicTickers;
     NSDictionary * dicAverage;
     NSInteger selectedCurrency;
+    
+    BOOL   currency_flip;
 }
 
 //@property (weak, nonatomic) IBOutlet UILabel * labelUSD;
@@ -90,6 +93,12 @@
     }
 }
 
+-(IBAction)buttonCurrencyPressed:(id)sender
+{
+    currency_flip = !currency_flip;
+    [self.tableView reloadData];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * cellIdentifier1 = @"Top";
@@ -122,9 +131,15 @@
 //        cell.labelPrice.text = [formatterPrice stringFromNumber:ticker.last];
 //        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
 
-        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
+        
         cell.labelPrice.text = @"";
         cell.labelVolume.text = [NSString stringWithFormat:@"%@", [formatterVolume stringFromNumber:ticker.vol]];
+        
+        if (currency_flip) {
+            cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last];
+        } else {
+            cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
+        }
         
         return cell;
     }
@@ -137,14 +152,19 @@
         NSArray * currencies = dicTickers.allKeys;
         NSInteger row = [self getTopCellIndex:indexPath.row];
         NSString * currency = [currencies objectAtIndex:row];
-        NSNumber * weighted_average = [dicAverage objectForKey:currency];
+        RPAverage * average = [dicAverage objectForKey:currency];
         
         static NSNumberFormatter *formatterPrice;
+        static NSNumberFormatter *formatterPriceReverse;
         static NSNumberFormatter *formatterVolume;
         if (!formatterPrice) {
             formatterPrice = [NSNumberFormatter new];
             formatterPrice.numberStyle = NSNumberFormatterDecimalStyle;
-            [formatterPrice setMaximumFractionDigits:8];
+            [formatterPrice setMaximumFractionDigits:2];
+            
+            formatterPriceReverse = [NSNumberFormatter new];
+            formatterPriceReverse.numberStyle = NSNumberFormatterDecimalStyle;
+            [formatterPriceReverse setMaximumFractionDigits:8];
             
             formatterVolume = [NSNumberFormatter new];
             formatterVolume.numberStyle = NSNumberFormatterDecimalStyle;
@@ -152,8 +172,16 @@
         }
         
         cell.labelCurrency.text = currency;
-        cell.labelPrice.text = @"";
-        cell.labelPriceOther.text = [formatterPrice stringFromNumber:weighted_average];
+        //cell.labelPrice.text = @"";
+        
+        if (currency_flip) {
+            [cell.buttonPrice setTitle:[formatterPrice stringFromNumber:average.weighted] forState:UIControlStateNormal];
+        }
+        else {
+            [cell.buttonPrice setTitle:[formatterPriceReverse stringFromNumber:average.weighted_reverse] forState:UIControlStateNormal];
+            //cell.labelPriceOther.text = [formatterPriceReverse stringFromNumber:average.weighted_reverse];
+        }
+        
         
         if (row == selectedCurrency) {
             cell.selected = YES;

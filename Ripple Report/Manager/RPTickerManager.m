@@ -9,6 +9,7 @@
 #import "RPTickerManager.h"
 #import "RPTicker.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "RPAverage.h"
 
 #define GLOBAL_FACTOR 1000000.0
 
@@ -121,14 +122,18 @@
             }
             
             double weighted_price = 0;
+            double weighted_price_reverse = 0;
             for (RPTicker * t in array) {
                 double vol = t.vol.doubleValue;
                 double weight = vol / total_volume;
                 
-                weighted_price += (t.last_reverse.doubleValue * weight);
+                weighted_price += (t.last.doubleValue * weight);
+                weighted_price_reverse += (t.last_reverse.doubleValue * weight);
             }
-            NSNumber * wPrice = [NSNumber numberWithDouble:weighted_price];
-            [dicAverage setObject:wPrice forKey:key];
+            RPAverage * average = [RPAverage new];
+            average.weighted = [NSNumber numberWithDouble:weighted_price];
+            average.weighted_reverse = [NSNumber numberWithDouble:weighted_price_reverse];
+            [dicAverage setObject:average forKey:key];
         }
         
         block(dicCurrency, dicAverage, nil);

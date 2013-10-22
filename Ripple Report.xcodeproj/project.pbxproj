@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B4FBE221817411C00B24810 /* RPAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FBE211817411C00B24810 /* RPAverage.m */; };
 		2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9289C11815D5A300E6639D /* CurrencyCell.m */; };
 		2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A21811D30F0077F4FF /* RPTicker.m */; };
 		2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A61811D38C0077F4FF /* RPTickerManager.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B4FBE201817411C00B24810 /* RPAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPAverage.h; path = Objects/RPAverage.h; sourceTree = "<group>"; };
+		2B4FBE211817411C00B24810 /* RPAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPAverage.m; path = Objects/RPAverage.m; sourceTree = "<group>"; };
 		2B9289C01815D5A300E6639D /* CurrencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyCell.h; path = TableView/CurrencyCell.h; sourceTree = "<group>"; };
 		2B9289C11815D5A300E6639D /* CurrencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyCell.m; path = TableView/CurrencyCell.m; sourceTree = "<group>"; };
 		2B94C8A11811D30F0077F4FF /* RPTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPTicker.h; path = Objects/RPTicker.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 			children = (
 				2B94C8A11811D30F0077F4FF /* RPTicker.h */,
 				2B94C8A21811D30F0077F4FF /* RPTicker.m */,
+				2B4FBE201817411C00B24810 /* RPAverage.h */,
+				2B4FBE211817411C00B24810 /* RPAverage.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -370,6 +375,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Ripple Labs Inc";
 				TargetAttributes = {
+					2BD2E31F18109018006A25A8 = {
+						DevelopmentTeam = NW66U7LJRG;
+					};
 					2BD2E34318109018006A25A8 = {
 						TestTargetID = 2BD2E31F18109018006A25A8;
 					};
@@ -443,6 +451,7 @@
 				2BD2E39E18109E5C006A25A8 /* AFSecurityPolicy.m in Sources */,
 				2BDC60E11815A0660056F8C8 /* GatewayPriceCell.m in Sources */,
 				2BD2E39C18109E5C006A25A8 /* AFHTTPSessionManager.m in Sources */,
+				2B4FBE221817411C00B24810 /* RPAverage.m in Sources */,
 				2BD2E3A018109E5C006A25A8 /* AFURLRequestSerialization.m in Sources */,
 				2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */,
 				2BD2E3A218109E5C006A25A8 /* AFURLSessionManager.m in Sources */,
@@ -585,10 +594,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -599,10 +611,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OpenCoin Inc. (NW66U7LJRG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OpenCoin Inc. (NW66U7LJRG)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
