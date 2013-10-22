@@ -24,7 +24,7 @@
 
 //@property (weak, nonatomic) IBOutlet UILabel * labelUSD;
 //@property (weak, nonatomic) IBOutlet UILabel * labelBTC;
-//@property (weak, nonatomic) IBOutlet UILabel * labelCYN;
+@property (weak, nonatomic) IBOutlet UILabel * labelHeader1;
 
 @property (weak, nonatomic) IBOutlet UITableView * tableView;
 
@@ -93,10 +93,21 @@
     }
 }
 
+-(void)updateHeader
+{
+    if (!currency_flip) {
+        self.labelHeader1.text = @"1 XRP = ?";
+    }
+    else {
+        self.labelHeader1.text = @"1 ? = XRP";
+    }
+}
+
 -(IBAction)buttonCurrencyPressed:(id)sender
 {
     currency_flip = !currency_flip;
     [self.tableView reloadData];
+    [self updateHeader];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,11 +126,16 @@
         RPTicker * ticker = [tickers objectAtIndex:row];
         
         static NSNumberFormatter *formatterPrice;
+        static NSNumberFormatter *formatterPriceReverse;
         static NSNumberFormatter *formatterVolume;
         if (!formatterPrice) {
             formatterPrice = [NSNumberFormatter new];
             formatterPrice.numberStyle = NSNumberFormatterDecimalStyle;
-            [formatterPrice setMaximumFractionDigits:8];
+            [formatterPrice setMaximumFractionDigits:2];
+            
+            formatterPriceReverse = [NSNumberFormatter new];
+            formatterPriceReverse.numberStyle = NSNumberFormatterDecimalStyle;
+            [formatterPriceReverse setMaximumFractionDigits:8];
             
             formatterVolume = [NSNumberFormatter new];
             formatterVolume.numberStyle = NSNumberFormatterDecimalStyle;
@@ -138,7 +154,7 @@
         if (currency_flip) {
             cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last];
         } else {
-            cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
+            cell.labelPriceOther.text = [formatterPriceReverse stringFromNumber:ticker.last_reverse];
         }
         
         return cell;
@@ -300,6 +316,9 @@
     selectedCurrency = -1;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRippleCharts) name: UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [self.labelHeader1 setFont:[UIFont fontWithName:self.labelHeader1.font.fontName size:11.0f]];
+    [self updateHeader];
 }
 
 - (void)didReceiveMemoryWarning
