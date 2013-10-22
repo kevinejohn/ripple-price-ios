@@ -110,7 +110,7 @@
         if (!formatterPrice) {
             formatterPrice = [NSNumberFormatter new];
             formatterPrice.numberStyle = NSNumberFormatterDecimalStyle;
-            [formatterPrice setMaximumFractionDigits:6];
+            [formatterPrice setMaximumFractionDigits:8];
             
             formatterVolume = [NSNumberFormatter new];
             formatterVolume.numberStyle = NSNumberFormatterDecimalStyle;
@@ -144,7 +144,7 @@
         if (!formatterPrice) {
             formatterPrice = [NSNumberFormatter new];
             formatterPrice.numberStyle = NSNumberFormatterDecimalStyle;
-            [formatterPrice setMaximumFractionDigits:6];
+            [formatterPrice setMaximumFractionDigits:8];
             
             formatterVolume = [NSNumberFormatter new];
             formatterVolume.numberStyle = NSNumberFormatterDecimalStyle;
