@@ -15,6 +15,7 @@
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate> {
     NSTimer * timer;
     NSDictionary * dicTickers;
+    NSDictionary * dicAverage;
     NSInteger selectedCurrency;
 }
 
@@ -109,7 +110,7 @@
         if (!formatterPrice) {
             formatterPrice = [NSNumberFormatter new];
             formatterPrice.numberStyle = NSNumberFormatterDecimalStyle;
-            [formatterPrice setMaximumFractionDigits:2];
+            [formatterPrice setMaximumFractionDigits:6];
             
             formatterVolume = [NSNumberFormatter new];
             formatterVolume.numberStyle = NSNumberFormatterDecimalStyle;
@@ -121,7 +122,7 @@
 //        cell.labelPrice.text = [formatterPrice stringFromNumber:ticker.last];
 //        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
 
-        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last];
+        cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last_reverse];
         cell.labelPrice.text = @"";
         cell.labelVolume.text = [NSString stringWithFormat:@"%@", [formatterVolume stringFromNumber:ticker.vol]];
         
@@ -136,13 +137,14 @@
         NSArray * currencies = dicTickers.allKeys;
         NSInteger row = [self getTopCellIndex:indexPath.row];
         NSString * currency = [currencies objectAtIndex:row];
+        NSNumber * weighted_average = [dicAverage objectForKey:currency];
         
         static NSNumberFormatter *formatterPrice;
         static NSNumberFormatter *formatterVolume;
         if (!formatterPrice) {
             formatterPrice = [NSNumberFormatter new];
             formatterPrice.numberStyle = NSNumberFormatterDecimalStyle;
-            [formatterPrice setMaximumFractionDigits:2];
+            [formatterPrice setMaximumFractionDigits:6];
             
             formatterVolume = [NSNumberFormatter new];
             formatterVolume.numberStyle = NSNumberFormatterDecimalStyle;
@@ -151,7 +153,7 @@
         
         cell.labelCurrency.text = currency;
         cell.labelPrice.text = @"";
-        cell.labelPriceOther.text = @"";
+        cell.labelPriceOther.text = [formatterPrice stringFromNumber:weighted_average];
         
         if (row == selectedCurrency) {
             cell.selected = YES;
@@ -249,9 +251,10 @@
 
 -(void)updateRippleCharts
 {
-    [[RPTickerManager shared] updateTickers:^(NSDictionary *t, NSError *error) {
+    [[RPTickerManager shared] updateTickers:^(NSDictionary *t, NSDictionary *a, NSError *error) {
         if (!error) {
             dicTickers = t;
+            dicAverage = a;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }];

@@ -16,6 +16,7 @@
     //NSArray * tickers;
     
     NSMutableDictionary * dicCurrency;
+    NSMutableDictionary * dicAverage;
 }
 
 @end
@@ -35,7 +36,7 @@
     return t;
 }
 
--(void)updateTickers:(void (^)(NSDictionary *tickers, NSError *error))block
+-(void)updateTickers:(void (^)(NSDictionary *tickers, NSDictionary* average, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //    [manager GET:@"https://ripplecharts.com/api/ripplecom.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -83,16 +84,22 @@
             ticker.last = last;
             ticker.last_reverse = [NSNumber numberWithDouble:(1.0/last.doubleValue)];
             
-            NSMutableArray * tickers = [dicCurrency objectForKey:ticker.currency];
-            if (!tickers) {
-                tickers = [NSMutableArray array];
+            // Filter tickers with 0 volume or price
+            if (ticker.vol.integerValue == 0 || ticker.last.doubleValue == 0.0) {
+                // Don't add
             }
-            [tickers addObject:ticker];
-            [dicCurrency setObject:tickers forKey:ticker.currency];
-            
+            else {
+                // Add
+                NSMutableArray * tickers = [dicCurrency objectForKey:ticker.currency];
+                if (!tickers) {
+                    tickers = [NSMutableArray array];
+                }
+                [tickers addObject:ticker];
+                [dicCurrency setObject:tickers forKey:ticker.currency];
+            }
         }
         
-        // Sort blocks
+        // Sort blocks by volume
         for (NSString * key in dicCurrency.allKeys) {
             NSArray * value = [dicCurrency objectForKey:key];
             
@@ -102,10 +109,32 @@
             [dicCurrency setObject:value forKey:key];
         }
         
-        block(dicCurrency, nil);
+        // Find weighted average
+        dicAverage = [NSMutableDictionary dictionary];
+        for (NSString * key in dicCurrency.allKeys) {
+            NSArray * array = [dicCurrency objectForKey:key];
+            
+            double total_volume = 0;
+            // Find total volume
+            for (RPTicker * t in array) {
+                total_volume += t.vol.doubleValue;
+            }
+            
+            double weighted_price = 0;
+            for (RPTicker * t in array) {
+                double vol = t.vol.doubleValue;
+                double weight = vol / total_volume;
+                
+                weighted_price += (t.last_reverse.doubleValue * weight);
+            }
+            NSNumber * wPrice = [NSNumber numberWithDouble:weighted_price];
+            [dicAverage setObject:wPrice forKey:key];
+        }
+        
+        block(dicCurrency, dicAverage, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        block(nil, error);
+        block(nil, nil, error);
     }];
 }
 
