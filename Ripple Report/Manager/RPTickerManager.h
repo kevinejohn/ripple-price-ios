@@ -11,6 +11,6 @@
 @interface RPTickerManager : NSObject
 
 +(id)shared;
--(void)updateTickers:(void (^)(NSArray *tickers, NSError *error))block;
+-(void)updateTickers:(void (^)(NSDictionary *tickers, NSError *error))block;
 
 @end

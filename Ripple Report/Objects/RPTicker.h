@@ -10,8 +10,11 @@
 
 @interface RPTicker : NSObject
 
-@property (strong, nonatomic) NSString * sym;
+//@property (strong, nonatomic) NSString * sym;
+@property (strong, nonatomic) NSString * currency;
+@property (strong, nonatomic) NSString * gateway;
 @property (strong, nonatomic) NSNumber * vol;
 @property (strong, nonatomic) NSNumber * last;
+@property (strong, nonatomic) NSNumber * last_reverse;
 
 @end

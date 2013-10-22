@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9289C11815D5A300E6639D /* CurrencyCell.m */; };
 		2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A21811D30F0077F4FF /* RPTicker.m */; };
 		2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A61811D38C0077F4FF /* RPTickerManager.m */; };
 		2BD2E32418109018006A25A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD2E32318109018006A25A8 /* Foundation.framework */; };
@@ -45,6 +46,7 @@
 		2BD2E3BA1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3AF1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf */; };
 		2BD2E3BE1810A633006A25A8 /* top_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3BC1810A633006A25A8 /* top_logo.png */; };
 		2BD2E3BF1810A633006A25A8 /* top_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */; };
+		2BDC60E11815A0660056F8C8 /* GatewayPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC60E01815A0660056F8C8 /* GatewayPriceCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B9289C01815D5A300E6639D /* CurrencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyCell.h; path = TableView/CurrencyCell.h; sourceTree = "<group>"; };
+		2B9289C11815D5A300E6639D /* CurrencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyCell.m; path = TableView/CurrencyCell.m; sourceTree = "<group>"; };
 		2B94C8A11811D30F0077F4FF /* RPTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPTicker.h; path = Objects/RPTicker.h; sourceTree = "<group>"; };
 		2B94C8A21811D30F0077F4FF /* RPTicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPTicker.m; path = Objects/RPTicker.m; sourceTree = "<group>"; };
 		2B94C8A51811D38C0077F4FF /* RPTickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPTickerManager.h; path = Manager/RPTickerManager.h; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 		2BD2E3AF1810A57C006A25A8 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		2BD2E3BC1810A633006A25A8 /* top_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_logo.png; sourceTree = "<group>"; };
 		2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_logo@2x.png"; sourceTree = "<group>"; };
+		2BDC60DF1815A0660056F8C8 /* GatewayPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GatewayPriceCell.h; path = TableView/GatewayPriceCell.h; sourceTree = "<group>"; };
+		2BDC60E01815A0660056F8C8 /* GatewayPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GatewayPriceCell.m; path = TableView/GatewayPriceCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +199,7 @@
 		2BD2E32918109018006A25A8 /* Ripple Report */ = {
 			isa = PBXGroup;
 			children = (
+				2BDC60DE1815A03E0056F8C8 /* TableView */,
 				2B94C8A41811D37C0077F4FF /* Managers */,
 				2B94C8A01811D2FA0077F4FF /* Objects */,
 				2BD2E33218109018006A25A8 /* AppDelegate.h */,
@@ -303,6 +310,17 @@
 				2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		2BDC60DE1815A03E0056F8C8 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				2BDC60DF1815A0660056F8C8 /* GatewayPriceCell.h */,
+				2BDC60E01815A0660056F8C8 /* GatewayPriceCell.m */,
+				2B9289C01815D5A300E6639D /* CurrencyCell.h */,
+				2B9289C11815D5A300E6639D /* CurrencyCell.m */,
+			);
+			name = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,9 +437,11 @@
 				2BD2E33D18109018006A25A8 /* ViewController.m in Sources */,
 				2BD2E39B18109E5C006A25A8 /* AFHTTPRequestOperationManager.m in Sources */,
 				2BD2E39D18109E5C006A25A8 /* AFNetworkReachabilityManager.m in Sources */,
+				2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */,
 				2BD2E3A118109E5C006A25A8 /* AFURLResponseSerialization.m in Sources */,
 				2BD2E39F18109E5C006A25A8 /* AFURLConnectionOperation.m in Sources */,
 				2BD2E39E18109E5C006A25A8 /* AFSecurityPolicy.m in Sources */,
+				2BDC60E11815A0660056F8C8 /* GatewayPriceCell.m in Sources */,
 				2BD2E39C18109E5C006A25A8 /* AFHTTPSessionManager.m in Sources */,
 				2BD2E3A018109E5C006A25A8 /* AFURLRequestSerialization.m in Sources */,
 				2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */,

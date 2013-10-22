@@ -13,7 +13,9 @@
 #define GLOBAL_FACTOR 1000000.0
 
 @interface RPTickerManager () {
-    NSMutableArray * tickers;
+    //NSArray * tickers;
+    
+    NSMutableDictionary * dicCurrency;
 }
 
 @end
@@ -33,7 +35,7 @@
     return t;
 }
 
--(void)updateTickers:(void (^)(NSArray *tickers, NSError *error))block
+-(void)updateTickers:(void (^)(NSDictionary *tickers, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //    [manager GET:@"https://ripplecharts.com/api/ripplecom.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -62,8 +64,10 @@
     [manager GET:@"https://ripplecharts.com/api/model.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
+        dicCurrency = [NSMutableDictionary dictionary];
+        
         NSDictionary * dic = [responseObject objectForKey:@"tickers"];
-        tickers = [NSMutableArray arrayWithCapacity:dic.count];
+        //NSMutableArray * unsorted = [NSMutableArray arrayWithCapacity:dic.count];
         for (NSString * key in dic.allKeys) {
             NSDictionary * value = [dic objectForKey:key];
             
@@ -73,14 +77,32 @@
             NSNumber * last = [self convertNumber:b];
             
             RPTicker * ticker = [RPTicker new];
-            ticker.sym = sym;
+            ticker.currency = [[sym componentsSeparatedByString: @":"] objectAtIndex:0];
+            ticker.gateway = [[sym componentsSeparatedByString: @":"] objectAtIndex:1];
             ticker.vol = vol;
             ticker.last = last;
+            ticker.last_reverse = [NSNumber numberWithDouble:(1.0/last.doubleValue)];
             
+            NSMutableArray * tickers = [dicCurrency objectForKey:ticker.currency];
+            if (!tickers) {
+                tickers = [NSMutableArray array];
+            }
             [tickers addObject:ticker];
+            [dicCurrency setObject:tickers forKey:ticker.currency];
+            
         }
         
-        block(tickers, nil);
+        // Sort blocks
+        for (NSString * key in dicCurrency.allKeys) {
+            NSArray * value = [dicCurrency objectForKey:key];
+            
+            value = [value sortedArrayUsingComparator:^NSComparisonResult(RPTicker* a, RPTicker* b) {
+                return [b.vol compare:a.vol];
+            }];
+            [dicCurrency setObject:value forKey:key];
+        }
+        
+        block(dicCurrency, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         block(nil, error);
