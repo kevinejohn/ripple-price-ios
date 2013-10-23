@@ -86,7 +86,9 @@
             ticker.last_reverse = [NSNumber numberWithDouble:(1.0/last.doubleValue)];
             
             // Filter tickers with 0 volume or price
-            if (ticker.vol.integerValue < 100 || ticker.last.doubleValue == 0.0) {
+            if (ticker.vol.integerValue < 100 ||
+                ticker.last.doubleValue == 0.0 ||
+                [ticker.gateway isEqualToString:@"WeExchange"]) {
                 // Don't add
             }
             else {

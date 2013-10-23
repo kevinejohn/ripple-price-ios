@@ -142,6 +142,9 @@
             [formatterVolume setMaximumFractionDigits:0];
         }
         
+        [cell.labelText setFont:[UIFont fontWithName:cell.labelText.font.fontName size:10.0]];
+        [cell.labelVolume setFont:[UIFont fontWithName:cell.labelVolume.font.fontName size:13.0]];
+        [cell.labelGateway setFont:[UIFont fontWithName:@"OpenSans-Bold" size:15.0]];
         
         cell.labelGateway.text = ticker.gateway;
 //        cell.labelPrice.text = [formatterPrice stringFromNumber:ticker.last];
@@ -187,14 +190,16 @@
             [formatterVolume setMaximumFractionDigits:0];
         }
         
-        cell.labelCurrency.text = currency;
+        
         //cell.labelPrice.text = @"";
         
         if (currency_flip) {
-            [cell.buttonPrice setTitle:[formatterPrice stringFromNumber:average.weighted] forState:UIControlStateNormal];
+            cell.labelCurrency.text = [NSString stringWithFormat:@"1 %@ =", currency];
+            [cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ XRP", [formatterPrice stringFromNumber:average.weighted]] forState:UIControlStateNormal];
         }
         else {
-            [cell.buttonPrice setTitle:[formatterPriceReverse stringFromNumber:average.weighted_reverse] forState:UIControlStateNormal];
+            cell.labelCurrency.text = [NSString stringWithFormat:@"1 XRP ="];
+            [cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ %@", [formatterPriceReverse stringFromNumber:average.weighted_reverse], currency] forState:UIControlStateNormal];
             //cell.labelPriceOther.text = [formatterPriceReverse stringFromNumber:average.weighted_reverse];
         }
         
