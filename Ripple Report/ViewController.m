@@ -45,17 +45,25 @@
 
 -(NSArray*)getSelectedCurrencyArray
 {
-    RPAverage * average;
-    if ([self isCurrencySelected]) {
-        average = [arrayAverage objectAtIndex:selectedCurrency];
+    if (selectedCurrency >= selectedCurrency) {
+        RPAverage * average;
+        if ([self isCurrencySelected]) {
+            average = [arrayAverage objectAtIndex:selectedCurrency];
+        }
+        return average.tickers;
     }
-    return average.tickers;
+    return nil;
 }
 
 -(NSUInteger)numberOfTickersFromSelectedCurrency
 {
-    RPAverage * temp = [arrayAverage objectAtIndex:selectedCurrency];
-    return temp.tickers.count;
+    if (selectedCurrency >= 0) {
+        RPAverage * temp = [arrayAverage objectAtIndex:selectedCurrency];
+        return temp.tickers.count;
+    }
+    else {
+        return 0;
+    }
 }
 
 -(BOOL)isBottomCell:(NSUInteger)row
@@ -296,10 +304,10 @@
     }
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [UIView new];
-}
+//-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    return [UIView new];
+//}
 
 -(void)updateRippleCharts
 {
@@ -320,6 +328,12 @@
     [super viewWillAppear:animated];
     arrayAverage = [RPTickerManager shared].arrayFiltered;
     [self.tableView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self collapseCurrency:YES];
 }
 
 - (void)viewDidLoad

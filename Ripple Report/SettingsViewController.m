@@ -77,10 +77,10 @@
     [tableView reloadData];
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [UIView new];
-}
+//-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    return [UIView new];
+//}
 
 
 -(IBAction)buttonBackPressed:(id)sender
