@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B09C4D5181B0CD500CEB352 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B09C4D4181B0CD500CEB352 /* SettingsViewController.m */; };
+		2B09C4D9181B255C00CEB352 /* RPUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B09C4D8181B255C00CEB352 /* RPUserDefaults.m */; };
 		2B4FBE221817411C00B24810 /* RPAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FBE211817411C00B24810 /* RPAverage.m */; };
 		2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9289C11815D5A300E6639D /* CurrencyCell.m */; };
 		2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A21811D30F0077F4FF /* RPTicker.m */; };
@@ -61,6 +63,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B09C4D3181B0CD500CEB352 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		2B09C4D4181B0CD500CEB352 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		2B09C4D7181B255C00CEB352 /* RPUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPUserDefaults.h; path = UserDefaults/RPUserDefaults.h; sourceTree = "<group>"; };
+		2B09C4D8181B255C00CEB352 /* RPUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPUserDefaults.m; path = UserDefaults/RPUserDefaults.m; sourceTree = "<group>"; };
 		2B4FBE201817411C00B24810 /* RPAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPAverage.h; path = Objects/RPAverage.h; sourceTree = "<group>"; };
 		2B4FBE211817411C00B24810 /* RPAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPAverage.m; path = Objects/RPAverage.m; sourceTree = "<group>"; };
 		2B9289C01815D5A300E6639D /* CurrencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyCell.h; path = TableView/CurrencyCell.h; sourceTree = "<group>"; };
@@ -148,6 +154,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B09C4D6181B254100CEB352 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				2B09C4D7181B255C00CEB352 /* RPUserDefaults.h */,
+				2B09C4D8181B255C00CEB352 /* RPUserDefaults.m */,
+			);
+			name = UserDefaults;
+			sourceTree = "<group>";
+		};
 		2B94C8A01811D2FA0077F4FF /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +219,7 @@
 		2BD2E32918109018006A25A8 /* Ripple Report */ = {
 			isa = PBXGroup;
 			children = (
+				2B09C4D6181B254100CEB352 /* UserDefaults */,
 				2BDC60DE1815A03E0056F8C8 /* TableView */,
 				2B94C8A41811D37C0077F4FF /* Managers */,
 				2B94C8A01811D2FA0077F4FF /* Objects */,
@@ -215,6 +231,8 @@
 				2BD2E33C18109018006A25A8 /* ViewController.m */,
 				2BD2E33E18109018006A25A8 /* Images.xcassets */,
 				2BD2E32A18109018006A25A8 /* Supporting Files */,
+				2B09C4D3181B0CD500CEB352 /* SettingsViewController.h */,
+				2B09C4D4181B0CD500CEB352 /* SettingsViewController.m */,
 			);
 			path = "Ripple Report";
 			sourceTree = "<group>";
@@ -444,6 +462,7 @@
 				2BD2E39A18109E5C006A25A8 /* AFHTTPRequestOperation.m in Sources */,
 				2BD2E33D18109018006A25A8 /* ViewController.m in Sources */,
 				2BD2E39B18109E5C006A25A8 /* AFHTTPRequestOperationManager.m in Sources */,
+				2B09C4D5181B0CD500CEB352 /* SettingsViewController.m in Sources */,
 				2BD2E39D18109E5C006A25A8 /* AFNetworkReachabilityManager.m in Sources */,
 				2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */,
 				2BD2E3A118109E5C006A25A8 /* AFURLResponseSerialization.m in Sources */,
@@ -455,6 +474,7 @@
 				2BD2E3A018109E5C006A25A8 /* AFURLRequestSerialization.m in Sources */,
 				2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */,
 				2BD2E3A218109E5C006A25A8 /* AFURLSessionManager.m in Sources */,
+				2B09C4D9181B255C00CEB352 /* RPUserDefaults.m in Sources */,
 				2BD2E33418109018006A25A8 /* AppDelegate.m in Sources */,
 				2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */,
 				2BD2E33018109018006A25A8 /* main.m in Sources */,

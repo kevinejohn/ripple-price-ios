@@ -10,7 +10,11 @@
 
 @interface RPAverage : NSObject
 
+@property (strong, nonatomic) NSString * currency;
+@property (strong, nonatomic) NSNumber * total_volume;
 @property (strong, nonatomic) NSNumber * weighted;
 @property (strong, nonatomic) NSNumber * weighted_reverse;
+
+@property (strong, nonatomic) NSMutableArray  * tickers;
 
 @end

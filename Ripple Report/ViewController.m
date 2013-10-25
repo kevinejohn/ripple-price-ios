@@ -15,8 +15,9 @@
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate> {
     NSTimer * timer;
-    NSDictionary * dicTickers;
-    NSDictionary * dicAverage;
+    //NSDictionary * dicTickers;
+    //NSDictionary * dicAverage;
+    NSArray * arrayAverage;
     NSInteger selectedCurrency;
     
     BOOL   currency_flip;
@@ -44,17 +45,17 @@
 
 -(NSArray*)getSelectedCurrencyArray
 {
-    NSArray * array;
+    RPAverage * average;
     if ([self isCurrencySelected]) {
-        array = [dicTickers.allValues objectAtIndex:selectedCurrency];
+        average = [arrayAverage objectAtIndex:selectedCurrency];
     }
-    return array;
+    return average.tickers;
 }
 
 -(NSUInteger)numberOfTickersFromSelectedCurrency
 {
-    NSArray * temp = [dicTickers.allValues objectAtIndex:selectedCurrency];
-    return temp.count;
+    RPAverage * temp = [arrayAverage objectAtIndex:selectedCurrency];
+    return temp.tickers.count;
 }
 
 -(BOOL)isBottomCell:(NSUInteger)row
@@ -154,7 +155,7 @@
         cell.labelPrice.text = @"";
         cell.labelVolume.text = [NSString stringWithFormat:@"%@", [formatterVolume stringFromNumber:ticker.vol]];
         
-        if (currency_flip) {
+        if (((RPTickerManager*)[RPTickerManager shared]).xrpOverCurrency) {
             cell.labelPriceOther.text = [formatterPrice stringFromNumber:ticker.last];
         } else {
             cell.labelPriceOther.text = [formatterPriceReverse stringFromNumber:ticker.last_reverse];
@@ -168,10 +169,9 @@
         CurrencyCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
         cell.tag = 1;
         
-        NSArray * currencies = dicTickers.allKeys;
         NSInteger row = [self getTopCellIndex:indexPath.row];
-        NSString * currency = [currencies objectAtIndex:row];
-        RPAverage * average = [dicAverage objectForKey:currency];
+        RPAverage * average = [arrayAverage objectAtIndex:row];
+        NSString * currency = average.currency;
         
         static NSNumberFormatter *formatterPrice;
         static NSNumberFormatter *formatterPriceReverse;
@@ -193,7 +193,7 @@
         
         //cell.labelPrice.text = @"";
         
-        if (currency_flip) {
+        if (((RPTickerManager*)[RPTickerManager shared]).xrpOverCurrency) {
             cell.labelCurrency.text = [NSString stringWithFormat:@"1 %@ =", currency];
             [cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ XRP", [formatterPrice stringFromNumber:average.weighted]] forState:UIControlStateNormal];
         }
@@ -222,10 +222,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (selectedCurrency >= 0) {
-        return dicTickers.allKeys.count + [self numberOfTickersFromSelectedCurrency];
+        return arrayAverage.count + [self numberOfTickersFromSelectedCurrency];
     }
     else {
-        return dicTickers.allKeys.count;
+        return arrayAverage.count;
     }
 }
 
@@ -285,8 +285,6 @@
         
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:topRow inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
-    
-    
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -298,12 +296,16 @@
     }
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [UIView new];
+}
+
 -(void)updateRippleCharts
 {
-    [[RPTickerManager shared] updateTickers:^(NSDictionary *t, NSDictionary *a, NSError *error) {
+    [[RPTickerManager shared] updateTickers:^(NSArray * a, NSError *error) {
         if (!error) {
-            dicTickers = t;
-            dicAverage = a;
+            arrayAverage = a;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }];
@@ -311,6 +313,13 @@
     [timer invalidate];
     timer = nil;
     timer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(updateRippleCharts) userInfo:nil repeats:NO];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    arrayAverage = [RPTickerManager shared].arrayFiltered;
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad

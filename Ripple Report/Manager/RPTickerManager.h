@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RPTickerManager : NSObject
+@interface RPTickerManager : NSObject {
+    
+}
 
-+(id)shared;
--(void)updateTickers:(void (^)(NSDictionary *tickers, NSDictionary* average, NSError *error))block;
+@property (nonatomic) BOOL xrpOverCurrency;
+@property (strong, nonatomic) NSMutableSet   * setFilter;
+@property (strong, nonatomic) NSMutableArray * arrayFiltered;
+
++(RPTickerManager*)shared;
+-(void)updateTickers:(void (^)(NSArray* average, NSError *error))block;
+
+-(NSArray*)averages;
+-(void)filterCurrencies;
 
 @end

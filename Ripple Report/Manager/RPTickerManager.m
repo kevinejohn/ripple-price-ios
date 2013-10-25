@@ -16,13 +16,24 @@
 @interface RPTickerManager () {
     //NSArray * tickers;
     
-    NSMutableDictionary * dicCurrency;
-    NSMutableDictionary * dicAverage;
+    //NSMutableDictionary * dicCurrency;
+    //NSMutableDictionary * dicAverage;
+    
+    NSMutableArray * arrayAverage;
 }
 
 @end
 
 @implementation RPTickerManager
+
+-(NSArray*)averages
+{
+    NSMutableArray * array = [NSMutableArray array];
+    for (RPAverage * average in arrayAverage) {
+        [array addObject:average.currency];
+    }
+    return array;
+}
 
 -(NSNumber*)convertNumber:(NSString*)value
 {
@@ -37,7 +48,38 @@
     return t;
 }
 
--(void)updateTickers:(void (^)(NSDictionary *tickers, NSDictionary* average, NSError *error))block
+-(RPAverage*)rpAverageForCurrency:(NSString*)currency
+{
+    for (RPAverage * average in arrayAverage) {
+        if ([average.currency isEqualToString:currency]) {
+            return average;
+        }
+    }
+    return nil;
+}
+
+-(void)filterCurrencies
+{
+    [RPUserDefaults saveFilter:self.setFilter];
+    
+    self.arrayFiltered = [NSMutableArray array];
+    for (RPAverage * average in arrayAverage) {
+        if ([self.setFilter containsObject:average.currency]) {
+            // Filter out
+        }
+        else {
+            [self.arrayFiltered addObject:average];
+        }
+    }
+}
+
+-(void)setXrpOverCurrency:(BOOL)xrpOverCurrency
+{
+    [RPUserDefaults saveXrpOver:xrpOverCurrency];
+    _xrpOverCurrency = xrpOverCurrency;
+}
+
+-(void)updateTickers:(void (^)(NSArray *average, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //    [manager GET:@"https://ripplecharts.com/api/ripplecom.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -66,7 +108,8 @@
     [manager GET:@"https://ripplecharts.com/api/model.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
-        dicCurrency = [NSMutableDictionary dictionary];
+        //dicCurrency = [NSMutableDictionary dictionary];
+        arrayAverage = [NSMutableArray array];
         
         NSDictionary * dic = [responseObject objectForKey:@"tickers"];
         //NSMutableArray * unsorted = [NSMutableArray arrayWithCapacity:dic.count];
@@ -93,59 +136,70 @@
             }
             else {
                 // Add
-                NSMutableArray * tickers = [dicCurrency objectForKey:ticker.currency];
-                if (!tickers) {
-                    tickers = [NSMutableArray array];
+                
+                RPAverage * average = [self rpAverageForCurrency:ticker.currency];
+                if (!average) {
+                    average = [RPAverage new];
+                    average.currency = ticker.currency;
+                    average.tickers = [NSMutableArray array];
+                    
+                    [arrayAverage addObject:average];
                 }
-                [tickers addObject:ticker];
-                [dicCurrency setObject:tickers forKey:ticker.currency];
+                [average.tickers addObject:ticker];
             }
         }
         
+        
         // Sort blocks by volume
-        for (NSString * key in dicCurrency.allKeys) {
-            NSArray * value = [dicCurrency objectForKey:key];
+        for (RPAverage * average in arrayAverage) {
             
-            value = [value sortedArrayUsingComparator:^NSComparisonResult(RPTicker* a, RPTicker* b) {
+            NSArray * sorted = [average.tickers sortedArrayUsingComparator:^NSComparisonResult(RPTicker* a, RPTicker* b) {
                 return [b.vol compare:a.vol];
             }];
-            [dicCurrency setObject:value forKey:key];
+            average.tickers = [NSMutableArray arrayWithArray:sorted];
         }
         
         // Find weighted average
-        dicAverage = [NSMutableDictionary dictionary];
-        for (NSString * key in dicCurrency.allKeys) {
-            NSArray * array = [dicCurrency objectForKey:key];
+        for (RPAverage * average in arrayAverage) {
             
             double total_volume = 0;
             // Find total volume
-            for (RPTicker * t in array) {
+            for (RPTicker * t in average.tickers) {
                 total_volume += t.vol.doubleValue;
             }
             
             double weighted_price = 0;
             double weighted_price_reverse = 0;
-            for (RPTicker * t in array) {
+            for (RPTicker * t in average.tickers) {
                 double vol = t.vol.doubleValue;
                 double weight = vol / total_volume;
                 
                 weighted_price += (t.last.doubleValue * weight);
                 weighted_price_reverse += (t.last_reverse.doubleValue * weight);
             }
-            RPAverage * average = [RPAverage new];
             average.weighted = [NSNumber numberWithDouble:weighted_price];
             average.weighted_reverse = [NSNumber numberWithDouble:weighted_price_reverse];
-            [dicAverage setObject:average forKey:key];
+            average.total_volume = [NSNumber numberWithDouble:total_volume];
         }
         
-        block(dicCurrency, dicAverage, nil);
+        // Sort by total volume
+        NSArray * sorted = [arrayAverage sortedArrayUsingComparator:^NSComparisonResult(RPAverage* a, RPAverage* b) {
+            return [b.total_volume compare:a.total_volume];
+        }];
+        arrayAverage = [NSMutableArray arrayWithArray:sorted];
+        
+        
+        // Filter
+        [self filterCurrencies];
+        
+        block(self.arrayFiltered, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        block(nil, nil, error);
+        block(nil, error);
     }];
 }
 
-+(id)shared
++(RPTickerManager*)shared
 {
     static RPTickerManager * shared;
     if (!shared) {
@@ -158,7 +212,8 @@
 {
     self = [super init];
     if (self) {
-
+        self.setFilter = [RPUserDefaults getFilter];
+        self.xrpOverCurrency = [RPUserDefaults getXrpOver];
     }
     return self;
 }
