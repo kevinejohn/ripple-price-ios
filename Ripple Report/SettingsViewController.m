@@ -15,23 +15,24 @@
     NSMutableSet * setFilter;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel * labelConvertionType;
-@property (weak, nonatomic) IBOutlet UISwitch * switchConvertionType;
+//@property (weak, nonatomic) IBOutlet UILabel * labelConvertionType;
+//@property (weak, nonatomic) IBOutlet UISwitch * switchConvertionType;
+@property (weak, nonatomic) IBOutlet UISegmentedControl * segmentControlType;
 @property (weak, nonatomic) IBOutlet UITableView * tableView;
 
 @end
 
 @implementation SettingsViewController
 
--(IBAction)switchPressed:(UISwitch*)sender
+-(IBAction)switchPressed:(UISegmentedControl*)sender
 {
-    if (!sender.on) {
-        self.labelConvertionType.text = @"1 XRP = USD";
+    if (sender.selectedSegmentIndex == 0) {
+        //self.labelConvertionType.text = @"1 XRP = USD";
         [RPTickerManager shared].xrpOverCurrency = NO;
         
     }
     else {
-        self.labelConvertionType.text = @"1 USD = XRP";
+        //self.labelConvertionType.text = @"1 USD = XRP";
         [RPTickerManager shared].xrpOverCurrency = YES;
     }
 }
@@ -93,8 +94,15 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.switchConvertionType.on = [RPTickerManager shared].xrpOverCurrency;
-    [self switchPressed:self.switchConvertionType];
+    
+    if ([RPTickerManager shared].xrpOverCurrency) {
+        [self.segmentControlType setSelectedSegmentIndex:1];
+    }
+    else {
+        [self.segmentControlType setSelectedSegmentIndex:0];
+    }
+    
+    //[self switchPressed:self.switchConvertionType];
     
     currencies = [[RPTickerManager shared] averages];
     setFilter = [[RPTickerManager shared] setFilter];
