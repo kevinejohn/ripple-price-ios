@@ -8,8 +8,12 @@
 
 #import "SettingsViewController.h"
 #import "RPTickerManager.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate> {
+
+#define FEEDBACK_EMAIL @"ios-feedback@ripple.com"
+
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate> {
     NSArray * currencies;
     
     NSMutableSet * setFilter;
@@ -23,6 +27,73 @@
 @end
 
 @implementation SettingsViewController
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+	switch (result)
+	{
+		case MFMailComposeResultSent: {
+			UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: @"Thank You!"
+                                  message: nil
+                                  delegate: nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+			break;
+		case MFMailComposeResultSaved:
+			//[self sendDidFinish];
+			break;
+		case MFMailComposeResultCancelled:
+			//[self sendDidCancel];
+			break;
+		case MFMailComposeResultFailed:
+			//[self sendDidFailWithError:nil];
+			break;
+	}
+}
+
+-(IBAction)feedbackButtonPressed:(id)sender
+{
+    if (![MFMailComposeViewController canSendMail]) {
+        // TODO: Cannot send email
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Email is not configured on this device"
+                              message: [NSString stringWithFormat:@"Please send an email to %@", FEEDBACK_EMAIL]
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    
+	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+	if (!mailController) {
+		// e.g. no mail account registered (will show alert)
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Email is not configured on this device"
+                              message: [NSString stringWithFormat:@"Please send an email to %@", FEEDBACK_EMAIL]
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+		return;
+	}
+	
+	mailController.mailComposeDelegate = self;
+	
+	[mailController setSubject:[NSString stringWithFormat:@"%@ %@ Feedback",
+                                [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+                                [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+                                ]];
+    [mailController setToRecipients:[NSArray arrayWithObject:FEEDBACK_EMAIL]];
+    
+    [self presentViewController:mailController animated:YES completion:nil];
+}
 
 -(IBAction)switchPressed:(UISegmentedControl*)sender
 {
