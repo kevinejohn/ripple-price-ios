@@ -11,7 +11,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 
-#define FEEDBACK_EMAIL @"ios-feedback@ripple.com"
+#define FEEDBACK_EMAIL @"ios-support@ripple.com"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate> {
     NSArray * currencies;

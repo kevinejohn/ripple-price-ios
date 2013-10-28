@@ -237,6 +237,34 @@
     }
 }
 
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self isCurrencySelected]) {
+        return NO;
+    }
+    else {
+        return YES;
+    }
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSUInteger row = [self getTopCellIndex:indexPath.row];
+        RPAverage * average = [arrayAverage objectAtIndex:row];
+        
+        //add code here for when you hit delete
+        [[[RPTickerManager shared] setFilter] addObject:average.currency];
+        [[RPTickerManager shared] filterCurrencies];
+        arrayAverage = [RPTickerManager shared].arrayFiltered;
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        
+    }
+}
+
 -(NSArray*)indexSetOfSelectedCurrency
 {
     NSMutableArray *indexes = [[NSMutableArray alloc] init];
