@@ -75,7 +75,7 @@
 		2B94C8A21811D30F0077F4FF /* RPTicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPTicker.m; path = Objects/RPTicker.m; sourceTree = "<group>"; };
 		2B94C8A51811D38C0077F4FF /* RPTickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPTickerManager.h; path = Manager/RPTickerManager.h; sourceTree = "<group>"; };
 		2B94C8A61811D38C0077F4FF /* RPTickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPTickerManager.m; path = Manager/RPTickerManager.m; sourceTree = "<group>"; };
-		2BD2E32018109018006A25A8 /* Ripple Report.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ripple Report.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BD2E32018109018006A25A8 /* Ripple Price.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ripple Price.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD2E32318109018006A25A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2BD2E32518109018006A25A8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2BD2E32718109018006A25A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -199,7 +199,7 @@
 		2BD2E32118109018006A25A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2BD2E32018109018006A25A8 /* Ripple Report.app */,
+				2BD2E32018109018006A25A8 /* Ripple Price.app */,
 				2BD2E34418109018006A25A8 /* Ripple ReportTests.xctest */,
 			);
 			name = Products;
@@ -363,7 +363,7 @@
 			);
 			name = "Ripple Report";
 			productName = "Ripple Report";
-			productReference = 2BD2E32018109018006A25A8 /* Ripple Report.app */;
+			productReference = 2BD2E32018109018006A25A8 /* Ripple Price.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2BD2E34318109018006A25A8 /* Ripple ReportTests */ = {
@@ -614,13 +614,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1E2CF61D-39D6-4273-9B5B-194C0C35AFB4";
+				PRODUCT_NAME = "Ripple Price";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -636,8 +636,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B3941DCF-8635-4B69-9E5F-1879A57008AA";
+				PRODUCT_NAME = "Ripple Price";
+				PROVISIONING_PROFILE = "37E1E00D-40FC-4461-9A42-54059ACDD9DE";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

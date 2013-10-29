@@ -207,6 +207,7 @@
                                     <segment title="1 XRP = USD"/>
                                     <segment title="1 USD = XRP"/>
                                 </segments>
+                                <color key="tintColor" red="0.21960785984992981" green="0.46666669845581055" blue="0.67450982332229614" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <action selector="switchPressed:" destination="V4e-BA-lQu" eventType="valueChanged" id="hGF-dB-Z3e"/>
                                 </connections>

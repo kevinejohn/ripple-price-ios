@@ -71,6 +71,12 @@
             [self.arrayFiltered addObject:average];
         }
     }
+    
+    for (RPAverage * average in self.arrayFiltered) {
+        RPTicker * ticker = [average.tickers objectAtIndex:0];
+        average.weighted = ticker.last;
+        average.weighted_reverse = ticker.last_reverse;
+    }
 }
 
 -(void)setXrpOverCurrency:(BOOL)xrpOverCurrency
@@ -104,6 +110,12 @@
     //        NSLog(@"Error: %@", error);
     //    }];
     
+    static NSNumberFormatter * f;
+    if (!f) {
+        f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    }
+    
     
     [manager GET:@"https://ripplecharts.com/api/model.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
@@ -117,7 +129,8 @@
             NSDictionary * value = [dic objectForKey:key];
             
             NSString * sym = [value objectForKey:@"sym"];
-            NSNumber * vol = [value objectForKey:@"vol"];
+            NSDictionary * d1 = [value objectForKey:@"d1"];
+            NSNumber * vol = [f numberFromString:[d1 objectForKey:@"vol"]];
             NSString * b = [value objectForKey:@"last"];
             NSNumber * last = [self convertNumber:b];
             
@@ -129,7 +142,7 @@
             ticker.last_reverse = [NSNumber numberWithDouble:(1.0/last.doubleValue)];
             
             // Filter tickers with 0 volume or price
-            if (ticker.vol.integerValue < 100 ||
+            if (ticker.vol.integerValue < 1 ||
                 ticker.last.doubleValue == 0.0 ||
                 [ticker.gateway isEqualToString:@"WeExchange"]) {
                 // Don't add
@@ -142,6 +155,7 @@
                     average = [RPAverage new];
                     average.currency = ticker.currency;
                     average.tickers = [NSMutableArray array];
+                    average.total_volume = vol;
                     
                     [arrayAverage addObject:average];
                 }
@@ -159,35 +173,34 @@
             average.tickers = [NSMutableArray arrayWithArray:sorted];
         }
         
-        // Find weighted average
-        for (RPAverage * average in arrayAverage) {
-            
-            double total_volume = 0;
-            // Find total volume
-            for (RPTicker * t in average.tickers) {
-                total_volume += t.vol.doubleValue;
-            }
-            
-            double weighted_price = 0;
-            double weighted_price_reverse = 0;
-            for (RPTicker * t in average.tickers) {
-                double vol = t.vol.doubleValue;
-                double weight = vol / total_volume;
-                
-                weighted_price += (t.last.doubleValue * weight);
-                weighted_price_reverse += (t.last_reverse.doubleValue * weight);
-            }
-            average.weighted = [NSNumber numberWithDouble:weighted_price];
-            average.weighted_reverse = [NSNumber numberWithDouble:weighted_price_reverse];
-            average.total_volume = [NSNumber numberWithDouble:total_volume];
-        }
+//        // Find weighted average
+//        for (RPAverage * average in arrayAverage) {
+//            
+//            double total_volume = 0;
+//            // Find total volume
+//            for (RPTicker * t in average.tickers) {
+//                total_volume += t.vol.doubleValue;
+//            }
+//            
+//            double weighted_price = 0;
+//            double weighted_price_reverse = 0;
+//            for (RPTicker * t in average.tickers) {
+//                double vol = t.vol.doubleValue;
+//                double weight = vol / total_volume;
+//                
+//                weighted_price += (t.last.doubleValue * weight);
+//                weighted_price_reverse += (t.last_reverse.doubleValue * weight);
+//            }
+//            average.weighted = [NSNumber numberWithDouble:weighted_price];
+//            average.weighted_reverse = [NSNumber numberWithDouble:weighted_price_reverse];
+//            average.total_volume = [NSNumber numberWithDouble:total_volume];
+//        }
         
         // Sort by total volume
         NSArray * sorted = [arrayAverage sortedArrayUsingComparator:^NSComparisonResult(RPAverage* a, RPAverage* b) {
             return [b.total_volume compare:a.total_volume];
         }];
         arrayAverage = [NSMutableArray arrayWithArray:sorted];
-        
         
         // Filter
         [self filterCurrencies];
