@@ -50,6 +50,8 @@
 		2BD2E3BE1810A633006A25A8 /* top_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3BC1810A633006A25A8 /* top_logo.png */; };
 		2BD2E3BF1810A633006A25A8 /* top_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */; };
 		2BDC60E11815A0660056F8C8 /* GatewayPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC60E01815A0660056F8C8 /* GatewayPriceCell.m */; };
+		2BFD03AC1820739E00D0FC80 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BFD03AB1820739E00D0FC80 /* Gear.png */; };
+		2BFD03B61820864200D0FC80 /* Gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BFD03B51820864200D0FC80 /* Gear@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_logo@2x.png"; sourceTree = "<group>"; };
 		2BDC60DF1815A0660056F8C8 /* GatewayPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GatewayPriceCell.h; path = TableView/GatewayPriceCell.h; sourceTree = "<group>"; };
 		2BDC60E01815A0660056F8C8 /* GatewayPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GatewayPriceCell.m; path = TableView/GatewayPriceCell.m; sourceTree = "<group>"; };
+		2BFD03AB1820739E00D0FC80 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Gear.png; path = Images/Gear.png; sourceTree = "<group>"; };
+		2BFD03B51820864200D0FC80 /* Gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Gear@2x.png"; path = "Images/Gear@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,8 @@
 		2BD2E3BB1810A61F006A25A8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2BFD03B51820864200D0FC80 /* Gear@2x.png */,
+				2BFD03AB1820739E00D0FC80 /* Gear.png */,
 				2BD2E3BC1810A633006A25A8 /* top_logo.png */,
 				2BD2E3BD1810A633006A25A8 /* top_logo@2x.png */,
 			);
@@ -434,9 +440,11 @@
 				2BD2E3B11810A57C006A25A8 /* OpenSans-Bold.ttf in Resources */,
 				2BD2E3B31810A57C006A25A8 /* OpenSans-ExtraBold.ttf in Resources */,
 				2BD2E3B21810A57C006A25A8 /* OpenSans-BoldItalic.ttf in Resources */,
+				2BFD03AC1820739E00D0FC80 /* Gear.png in Resources */,
 				2BD2E3BE1810A633006A25A8 /* top_logo.png in Resources */,
 				2BD2E33718109018006A25A8 /* Main_iPhone.storyboard in Resources */,
 				2BD2E3B61810A57C006A25A8 /* OpenSans-Light.ttf in Resources */,
+				2BFD03B61820864200D0FC80 /* Gear@2x.png in Resources */,
 				2BD2E3B81810A57C006A25A8 /* OpenSans-Regular.ttf in Resources */,
 				2BD2E3B91810A57C006A25A8 /* OpenSans-Semibold.ttf in Resources */,
 				2BD2E32E18109018006A25A8 /* InfoPlist.strings in Resources */,
