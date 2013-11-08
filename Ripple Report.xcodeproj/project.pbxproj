@@ -639,13 +639,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OpenCoin Inc. (NW66U7LJRG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OpenCoin Inc. (NW66U7LJRG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ripple Report/Ripple Report-Prefix.pch";
 				INFOPLIST_FILE = "Ripple Report/Ripple Report-Info.plist";
 				PRODUCT_NAME = "Ripple Price";
-				PROVISIONING_PROFILE = "37E1E00D-40FC-4461-9A42-54059ACDD9DE";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
