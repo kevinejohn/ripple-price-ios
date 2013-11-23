@@ -10,6 +10,7 @@
 #import "RPTicker.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "RPAverage.h"
+#import "RPHelper.h"
 
 #define GLOBAL_FACTOR 1000000.0
 
@@ -35,17 +36,9 @@
     return array;
 }
 
--(NSNumber*)convertNumber:(NSString*)value
+-(NSNumber*)convertNumber:(NSNumber*)num
 {
-    static NSNumberFormatter * f;
-    if (!f) {
-        f = [NSNumberFormatter new];
-        [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    }
-    
-    NSNumber * t = [f numberFromString:value];
-    t = [NSNumber numberWithDouble:(t.doubleValue / GLOBAL_FACTOR)];
-    return t;
+    return [NSNumber numberWithDouble:(num.doubleValue / GLOBAL_FACTOR)];
 }
 
 -(RPAverage*)rpAverageForCurrency:(NSString*)currency
@@ -118,21 +111,26 @@
     
     
     [manager GET:@"https://ripplecharts.com/api/model.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        // NSLog(@"JSON: %@", responseObject);
         
         //dicCurrency = [NSMutableDictionary dictionary];
         arrayAverage = [NSMutableArray array];
         
-        NSDictionary * dic = [responseObject objectForKey:@"tickers"];
+        NSDictionary * dic = [RPHelper safeKey:responseObject withKey:@"tickers"];
+        
+        if (!dic || dic.allKeys.count == 0) {
+            NSLog(@"%@: Invalid key: tickers",self);
+        }
+        
         //NSMutableArray * unsorted = [NSMutableArray arrayWithCapacity:dic.count];
         for (NSString * key in dic.allKeys) {
             NSDictionary * value = [dic objectForKey:key];
             
-            NSString * sym = [value objectForKey:@"sym"];
-            NSDictionary * d1 = [value objectForKey:@"d1"];
-            NSNumber * vol = [f numberFromString:[d1 objectForKey:@"vol"]];
-            NSString * b = [value objectForKey:@"last"];
-            NSNumber * last = [self convertNumber:b];
+            NSString * sym = [RPHelper safeKey:value withKey:@"sym"];
+            NSDictionary * d1 = [RPHelper safeKey:value withKey:@"d1"];
+            NSNumber * vol = [RPHelper safeNumber:d1 withKey:@"vol"];
+            NSNumber * last = [RPHelper safeNumber:value withKey:@"last"];
+            last = [self convertNumber:last];
             
             RPTicker * ticker = [RPTicker new];
             ticker.currency = [[sym componentsSeparatedByString: @":"] objectAtIndex:0];

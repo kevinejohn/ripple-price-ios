@@ -15,6 +15,7 @@
 		2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9289C11815D5A300E6639D /* CurrencyCell.m */; };
 		2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A21811D30F0077F4FF /* RPTicker.m */; };
 		2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A61811D38C0077F4FF /* RPTickerManager.m */; };
+		2BA3229E184036100026838A /* RPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3229D184036100026838A /* RPHelper.m */; };
 		2BD2E32418109018006A25A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD2E32318109018006A25A8 /* Foundation.framework */; };
 		2BD2E32618109018006A25A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD2E32518109018006A25A8 /* CoreGraphics.framework */; };
 		2BD2E32818109018006A25A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD2E32718109018006A25A8 /* UIKit.framework */; };
@@ -79,6 +80,8 @@
 		2B94C8A21811D30F0077F4FF /* RPTicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPTicker.m; path = Objects/RPTicker.m; sourceTree = "<group>"; };
 		2B94C8A51811D38C0077F4FF /* RPTickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPTickerManager.h; path = Manager/RPTickerManager.h; sourceTree = "<group>"; };
 		2B94C8A61811D38C0077F4FF /* RPTickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPTickerManager.m; path = Manager/RPTickerManager.m; sourceTree = "<group>"; };
+		2BA3229C184036100026838A /* RPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPHelper.h; path = Helpers/RPHelper.h; sourceTree = "<group>"; };
+		2BA3229D184036100026838A /* RPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPHelper.m; path = Helpers/RPHelper.m; sourceTree = "<group>"; };
 		2BD2E32018109018006A25A8 /* Ripple Price.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ripple Price.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD2E32318109018006A25A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2BD2E32518109018006A25A8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -187,6 +190,15 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		2BA3229B184035FF0026838A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2BA3229C184036100026838A /* RPHelper.h */,
+				2BA3229D184036100026838A /* RPHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		2BD2E31718109018006A25A8 = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +235,7 @@
 		2BD2E32918109018006A25A8 /* Ripple Report */ = {
 			isa = PBXGroup;
 			children = (
+				2BA3229B184035FF0026838A /* Helpers */,
 				2B09C4D6181B254100CEB352 /* UserDefaults */,
 				2BDC60DE1815A03E0056F8C8 /* TableView */,
 				2B94C8A41811D37C0077F4FF /* Managers */,
@@ -486,6 +499,7 @@
 				2BD2E33418109018006A25A8 /* AppDelegate.m in Sources */,
 				2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */,
 				2BD2E33018109018006A25A8 /* main.m in Sources */,
+				2BA3229E184036100026838A /* RPHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
