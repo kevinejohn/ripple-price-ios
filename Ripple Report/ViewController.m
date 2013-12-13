@@ -45,7 +45,7 @@
 
 -(NSArray*)getSelectedCurrencyArray
 {
-    if (selectedCurrency >= selectedCurrency) {
+    if (selectedCurrency >= 0 && selectedCurrency < arrayAverage.count) {
         RPAverage * average;
         if ([self isCurrencySelected]) {
             average = [arrayAverage objectAtIndex:selectedCurrency];
@@ -57,7 +57,7 @@
 
 -(NSUInteger)numberOfTickersFromSelectedCurrency
 {
-    if (selectedCurrency >= 0) {
+    if (selectedCurrency >= 0 && selectedCurrency < arrayAverage.count) {
         RPAverage * temp = [arrayAverage objectAtIndex:selectedCurrency];
         return temp.tickers.count;
     }
@@ -203,11 +203,13 @@
         
         if (((RPTickerManager*)[RPTickerManager shared]).xrpOverCurrency) {
             cell.labelCurrency.text = [NSString stringWithFormat:@"1 %@ =", currency];
-            [cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ XRP", [formatterPrice stringFromNumber:average.weighted]] forState:UIControlStateNormal];
+            //[cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ XRP", [formatterPrice stringFromNumber:average.weighted]] forState:UIControlStateNormal];
+            cell.labelPrice.text = [NSString stringWithFormat:@"%@ XRP", [formatterPrice stringFromNumber:average.weighted]];
         }
         else {
             cell.labelCurrency.text = [NSString stringWithFormat:@"1 XRP ="];
-            [cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ %@", [formatterPriceReverse stringFromNumber:average.weighted_reverse], currency] forState:UIControlStateNormal];
+            //[cell.buttonPrice setTitle:[NSString stringWithFormat:@"%@ %@", [formatterPriceReverse stringFromNumber:average.weighted_reverse], currency] forState:UIControlStateNormal];
+            cell.labelPrice.text = [NSString stringWithFormat:@"%@ %@", [formatterPriceReverse stringFromNumber:average.weighted_reverse], currency];
             //cell.labelPriceOther.text = [formatterPriceReverse stringFromNumber:average.weighted_reverse];
         }
         
