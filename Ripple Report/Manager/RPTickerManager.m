@@ -53,6 +53,7 @@
 
 -(void)filterCurrencies
 {
+    NSLog(@"%@",self.setFilter);
     [RPUserDefaults saveFilter:self.setFilter];
     
     self.arrayFiltered = [NSMutableArray array];

@@ -25,7 +25,7 @@
 
 +(void)saveFilter:(NSSet*)filter
 {
-    if (filter && filter.count > 0) {
+    if (filter) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:[filter allObjects] forKey:@"filter"];
         [defaults synchronize];
