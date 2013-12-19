@@ -12,6 +12,7 @@
 		2B2E426C182D7E8D0073BAEB /* logo_price.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2E426A182D7E8D0073BAEB /* logo_price.png */; };
 		2B2E426D182D7E8D0073BAEB /* logo_price@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2E426B182D7E8D0073BAEB /* logo_price@2x.png */; };
 		2B4FBE221817411C00B24810 /* RPAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FBE211817411C00B24810 /* RPAverage.m */; };
+		2B5BA66C1862872F004AD6C9 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BA66B1862872F004AD6C9 /* HelpViewController.m */; };
 		2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9289C11815D5A300E6639D /* CurrencyCell.m */; };
 		2B94C8A31811D30F0077F4FF /* RPTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A21811D30F0077F4FF /* RPTicker.m */; };
 		2B94C8A71811D38C0077F4FF /* RPTickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B94C8A61811D38C0077F4FF /* RPTickerManager.m */; };
@@ -74,6 +75,8 @@
 		2B2E426B182D7E8D0073BAEB /* logo_price@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_price@2x.png"; path = "Images/logo_price@2x.png"; sourceTree = "<group>"; };
 		2B4FBE201817411C00B24810 /* RPAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPAverage.h; path = Objects/RPAverage.h; sourceTree = "<group>"; };
 		2B4FBE211817411C00B24810 /* RPAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPAverage.m; path = Objects/RPAverage.m; sourceTree = "<group>"; };
+		2B5BA66A1862872F004AD6C9 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		2B5BA66B1862872F004AD6C9 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		2B9289C01815D5A300E6639D /* CurrencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyCell.h; path = TableView/CurrencyCell.h; sourceTree = "<group>"; };
 		2B9289C11815D5A300E6639D /* CurrencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyCell.m; path = TableView/CurrencyCell.m; sourceTree = "<group>"; };
 		2B94C8A11811D30F0077F4FF /* RPTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPTicker.h; path = Objects/RPTicker.h; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				2BD2E32A18109018006A25A8 /* Supporting Files */,
 				2B09C4D3181B0CD500CEB352 /* SettingsViewController.h */,
 				2B09C4D4181B0CD500CEB352 /* SettingsViewController.m */,
+				2B5BA66A1862872F004AD6C9 /* HelpViewController.h */,
+				2B5BA66B1862872F004AD6C9 /* HelpViewController.m */,
 			);
 			path = "Ripple Report";
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				2BD2E33D18109018006A25A8 /* ViewController.m in Sources */,
 				2BD2E39B18109E5C006A25A8 /* AFHTTPRequestOperationManager.m in Sources */,
 				2B09C4D5181B0CD500CEB352 /* SettingsViewController.m in Sources */,
+				2B5BA66C1862872F004AD6C9 /* HelpViewController.m in Sources */,
 				2BD2E39D18109E5C006A25A8 /* AFNetworkReachabilityManager.m in Sources */,
 				2B9289C21815D5A300E6639D /* CurrencyCell.m in Sources */,
 				2BD2E3A118109E5C006A25A8 /* AFURLResponseSerialization.m in Sources */,
