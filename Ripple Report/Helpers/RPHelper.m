@@ -23,6 +23,7 @@
         static NSNumberFormatter * f;
         if (!f) {
             f = [[NSNumberFormatter alloc] init];
+            [f setDecimalSeparator:@"."];
             [f setNumberStyle:NSNumberFormatterDecimalStyle];
             [f setMaximumFractionDigits:20];
         }
